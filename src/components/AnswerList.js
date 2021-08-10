@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnswerDetails } from './AnswerDetails';
 
-export const AnswerList = ({answers}) => {
+export const AnswerList = ({answers, deleteAnswer}) => {
     //given an array of answers object (from the props), return answer details for each individual answer inside the answers array
 
     //warning for key: we will add the index and key as one of the properties to answerdetails
@@ -13,9 +13,11 @@ export const AnswerList = ({answers}) => {
                 answers.map((a, i) => {
                     return <AnswerDetails
                         key={i} 
+                        id={a.id}
                         body={a.body}
                         author={a.author}
                         created_at={a.created_at}
+                        deleteAnswer={deleteAnswer}
                     />
                 })
             }
