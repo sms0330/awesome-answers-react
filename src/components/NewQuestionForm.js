@@ -4,12 +4,14 @@ import React from 'react';
 const NewQuestionForm = ({createQuestion}) => {
 
     const handleSubmit = (event) => {
-        const formData = new FormData(event.currentTarget);
-        const params = {
-            title: formData.get('title'),
-            body: formData.get('body')
-        }
-        createQuestion(params);
+        event.preventDefault();
+         const formData = new FormData(event.currentTarget);
+         const params = {
+             title: formData.get('title'),
+             body: formData.get('body')
+         }
+         console.log("params : " + params.title);
+         createQuestion(params);
     }
     return(
         <form onSubmit={handleSubmit}>
