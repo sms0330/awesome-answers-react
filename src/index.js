@@ -8,8 +8,8 @@ import reportWebVitals from './reportWebVitals';
 //import QuestionDetails from './components/QuestionDetails';
 //import { QuestionDetails, AnswerDetails } from './components/QuestionDetails';
 //import { AnswerDetails } from './components/AnswerDetails';
-import QuestionShowPage from './components/QuestionShowPage';
-import {QuestionIndexPage} from './components/QuestionIndexPage'
+// import QuestionShowPage from './components/QuestionShowPage';
+// import {QuestionIndexPage} from './components/QuestionIndexPage'
 
 ReactDOM.render(
   //<QuestionShowPage />, //write component like they are html tags

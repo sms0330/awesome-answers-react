@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {QuestionDetails} from './QuestionDetails';
-import { AnswerDetails } from './AnswerDetails';
+// import { AnswerDetails } from './AnswerDetails';
 import {AnswerList} from './AnswerList';
 import questionData from '../questionData';
 
@@ -22,7 +22,7 @@ class QuestionShowPage extends Component {
   deleteAnswer(id) {
     this.setState((state) => {
       return {
-        answers: this.state.answers.filter(a => a.id != id)
+        answers: this.state.answers.filter(a => a.id !== id)
       }
     })
   }

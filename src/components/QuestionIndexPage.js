@@ -1,69 +1,74 @@
 import React, { Component} from 'react';
-import questionsIndexData from '../questionsIndexData';
+// import questionsIndexData from '../questionsIndexData';
 import NewQuestionForm from './NewQuestionForm';
+import { Question } from '../requests';
 
 export class QuestionIndexPage extends Component {
 
     constructor(props) {
+        //if you are using a class component and want to access 'this', must call super(props) in constructor
         super(props)
         this.state = {
-            questions: questionsIndexData
+            questions: []
         }
-
-        //Anytime that we are passing down methods that uses this you have to bind this to that method
         this.createQuestion = this.createQuestion.bind(this);
-        this.deleteQuestion = this.deleteQuestion.bind(this);
-        console.log('Questionindex Component initialized');
+        //console.log('Questionindex Component initialized');
+    }
+
+    componentDidMount(){
+        Question.index()
+        .then((questions) => {
+            this.setState((state) => {
+                return {
+                    questions: questions
+                }
+            })
+        })
     }
 
     createQuestion(params) {
         this.setState((state) => {
             return {
-                questions: [ //spread over an existing questions array (faster to merge elements this way)
-                    //spread - it will copy every element (key/values from an array) within state.questions into a new array
-                    
-                    { 
-                        id: (Math.max(...state.questions.map(q => q.id)) + 1), //find the largest id within an array and add to it
-                        title: params.title,
-                        body: params.body
-                        //...params
-                    },
-                    ...state.questions
-                ]
                 //[].concat(state.questions) -> another way to copy an array
+                questions: [ 
+                    //spread - it will copy every single element (keys/values from an array) within state.questions into a new array 
+                    ...state.questions,
+                    { 
+                        id: (Math.max(...state.questions.map(q => q.id)) + 1), //find the largest id within an array and add 1 to it
+                        //Math.max doesn't take in an array as an argument; takes in a number as paramters so we are using the spread synatax on the original questions array 
+                        title:params.title,
+                        body:params.body
+                        //...params
+                    }
+                ]
             }
         })
     }
 
     deleteQuestion(id) {
-
-        //To change state in a React component, you MUST use the setState(method)
+        //To change state in a React component, you MUST use the setState method(this.setState)
         //it takes an object that gets merged in the current state at React's convenience
         //the properties in setState() replace the same properties in the current state
         //This happens asynchronously and will eventually trigger an update to the DOM IF there is a change
 
-        //setState accepts a callback argument which receives the latest state 
-        //the return value of this callback function is merged or overwritten into this current state
-        // this.setState((state) => {
+        //setState() accepts a callback argument which receives the latest state 
+        //i.e. the cb function always receives the latest state as the argument
+        //the return value of this callback function is merged or overwritten into the current state
 
-        //     return state.questions.filter(q => q.id != id);
-        // })
-        //this.state.questions[0] = null;
+        //Key rules: when changing state, we never want to mutate data as React depends on new objects to determine what should be rendered/re-rendered
+        //this.state.questions[0] = null; -> don't do this
 
+        //lets overwrite the current questions state
         this.setState((state) => {
             return  {
-                questions: this.state.questions.filter(q => q.id != id)
+                questions: state.questions.filter(q => q.id !== id) //questions in this.state would be different than questions in this.setState()
+                //the above new questions object gets merged with the original this.state (new state has the same key => it will take the value of the new key instead of the old)
             }
         })
-        // this.setState({
-        //     questions: this.state.questions.filter(q => q.id != id)
-        // });
-
     }
 
-
     render() {
-        console.log('Question index page rendered');
+        //console.log('Question index page rendered');
         return (
             <main>
                 <NewQuestionForm createQuestion={this.createQuestion} />
@@ -72,7 +77,6 @@ export class QuestionIndexPage extends Component {
                         return(
                             <div key={q.id}>
                                 <h1>{q.id} - {q.title}</h1>
-                                {/* <button onClick={() => console.log(`${q.id} was clicked!`)}>Delete</button> */}
                                 <button onClick={() => this.deleteQuestion(q.id)}>Delete</button>
                             </div>
                         )
