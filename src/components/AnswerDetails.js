@@ -1,4 +1,4 @@
-export const AnswerDetails = ({body, author, created_at, id, deleteAnswer}) => {
+const AnswerDetails = ({body, author, created_at, id, deleteAnswer}) => {
   return(
     <div>
       <p>{body}</p>
@@ -6,9 +6,9 @@ export const AnswerDetails = ({body, author, created_at, id, deleteAnswer}) => {
       <p>
         <strong>Created at: </strong> {created_at.toLocaleString()}
       </p>
-      {/* <button onClick={() => console.log(id)}>Delete</button> */}
       <button onClick={() => deleteAnswer(id)}>Delete</button>
-      {/* couuld get an error of setState is undefined */}
     </div>
   )
 }
+
+export default AnswerDetails
