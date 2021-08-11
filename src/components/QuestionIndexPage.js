@@ -21,14 +21,14 @@ export class QuestionIndexPage extends Component {
             return {
                 questions: [ //spread over an existing questions array (faster to merge elements this way)
                     //spread - it will copy every element (key/values from an array) within state.questions into a new array
-                    ...state.questions,
+                    
                     { 
                         id: (Math.max(...state.questions.map(q => q.id)) + 1), //find the largest id within an array and add to it
                         title: params.title,
                         body: params.body
                         //...params
-                    }
-                    
+                    },
+                    ...state.questions
                 ]
                 //[].concat(state.questions) -> another way to copy an array
             }
