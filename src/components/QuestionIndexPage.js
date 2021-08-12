@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 // import questionsIndexData from '../questionsIndexData';
-import NewQuestionForm from './NewQuestionForm';
+// import NewQuestionForm from './NewQuestionForm';
 import { Question } from '../requests';
 
 export class QuestionIndexPage extends Component {
@@ -71,7 +71,6 @@ export class QuestionIndexPage extends Component {
         //console.log('Question index page rendered');
         return (
             <main>
-                <NewQuestionForm createQuestion={this.createQuestion} />
                 {
                     this.state.questions.map(q => {
                         return(
