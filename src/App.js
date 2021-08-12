@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import NewQuestionPage from './components/NewQuestionPage';
 import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
+import SignUpPage from './components/SignUpPage';
 
 // function App() {
 //   return (
@@ -65,10 +66,15 @@ class App extends Component {
           //Make sure to pass them to the component as well
           render={(routeProps) => <SignInPage {...routeProps} onSignIn={this.getCurrentUser} />}
           />
+          <Route 
+          exact path='/sign_up' 
+          render={(routeProps) => <SignUpPage {...routeProps} onSignUp={this.getCurrentUser} />} 
+          />
           <Route exact path='/questions'>
             <QuestionIndexPage />
           </Route>
           <AuthRoute
+            //The !! turns something "truthy" or "falsy" to true or false respectively
             isAuthenticated={!!this.state.user}
             exact path='/questions/new'
             component={NewQuestionPage}

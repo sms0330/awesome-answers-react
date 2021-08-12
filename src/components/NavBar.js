@@ -19,12 +19,16 @@ const NavBar = ({ currentUser, onSignOut }) => {
                 Navlinks as direct children of the <nav>.  The short form is <> </> */}
                 <NavLink to='/questions/new'>New Question</NavLink>
                 -
-                <span>Welcome, {currentUser.first_name}</span>
+                <span>Welcome, {currentUser.first_name || currentUser.last_name}</span>
                 -
                 <button onClick={handleSignOut}>Sign Out</button>
             </React.Fragment>
         ) : (
+            <>
             <NavLink to='sign_in'>Sign In</NavLink>
+            |
+            <NavLink to='sign_up'>Sign Up</NavLink>
+            </>
         )
     }
     </nav>
