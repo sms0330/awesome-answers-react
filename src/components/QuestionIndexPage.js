@@ -11,7 +11,7 @@ export class QuestionIndexPage extends Component {
         this.state = {
             questions: []
         }
-        this.createQuestion = this.createQuestion.bind(this);
+        // this.createQuestion = this.createQuestion.bind(this);
         //console.log('Questionindex Component initialized');
     }
 
@@ -26,24 +26,24 @@ export class QuestionIndexPage extends Component {
         })
     }
 
-    createQuestion(params) {
-        this.setState((state) => {
-            return {
-                //[].concat(state.questions) -> another way to copy an array
-                questions: [ 
-                    //spread - it will copy every single element (keys/values from an array) within state.questions into a new array 
-                    ...state.questions,
-                    { 
-                        id: (Math.max(...state.questions.map(q => q.id)) + 1), //find the largest id within an array and add 1 to it
-                        //Math.max doesn't take in an array as an argument; takes in a number as paramters so we are using the spread synatax on the original questions array 
-                        title:params.title,
-                        body:params.body
-                        //...params
-                    }
-                ]
-            }
-        })
-    }
+    // createQuestion(params) {
+    //     this.setState((state) => {
+    //         return {
+    //             //[].concat(state.questions) -> another way to copy an array
+    //             questions: [ 
+    //                 //spread - it will copy every single element (keys/values from an array) within state.questions into a new array 
+    //                 ...state.questions,
+    //                 { 
+    //                     id: (Math.max(...state.questions.map(q => q.id)) + 1), //find the largest id within an array and add 1 to it
+    //                     //Math.max doesn't take in an array as an argument; takes in a number as paramters so we are using the spread synatax on the original questions array 
+    //                     title:params.title,
+    //                     body:params.body
+    //                     //...params
+    //                 }
+    //             ]
+    //         }
+    //     })
+    // }
 
     deleteQuestion(id) {
         //To change state in a React component, you MUST use the setState method(this.setState)
