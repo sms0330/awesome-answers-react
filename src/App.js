@@ -11,6 +11,7 @@ import NewQuestionPage from './components/NewQuestionPage';
 import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
 import SignUpPage from './components/SignUpPage';
+import NotFoundPage from './components/NotFoundPage';
 
 // function App() {
 //   return (
@@ -80,6 +81,7 @@ class App extends Component {
             component={NewQuestionPage}
           />
           <Route path='/questions/:id' component={QuestionShowPage}></Route>
+          <Route component={NotFoundPage} />
           </Switch>
       </BrowserRouter>
     )
